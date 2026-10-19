@@ -1,0 +1,11 @@
+{
+  "name": "explain-extension",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && cargo test --manifest-path Cargo.toml && node --test tests/*.test.js",
+    "test:browser": "python tests/browser_test.py"
+  }
+}
