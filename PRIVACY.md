@@ -32,4 +32,4 @@ Google processes each request under its own terms, using your API key and accoun
 
 ## Contact
 
-Questions or concerns: open an issue at https://github.com/canmenzo/explainExtension/issues.
+Questions or concerns: open an issue at https://github.com/canmenzo/explain/issues.

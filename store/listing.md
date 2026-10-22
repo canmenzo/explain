@@ -39,7 +39,7 @@ Your use of the Gemini API is governed by Google's terms. On Google's free tier,
 Requirements
 - A Google Gemini API key (free or paid) from Google AI Studio.
 
-Open source: https://github.com/canmenzo/explainExtension
+Open source: https://github.com/canmenzo/explain
 ```
 
 ### Category
