@@ -43,7 +43,7 @@ function runtime({ key = "test-key", body = sse(textChunk("A clear "), textChunk
     fetch: async (...args) => {
       if (args[0] === "core.wasm") return { async arrayBuffer() { return wasm; } };
       sent.push(args);
-      return new Response(body, { status });
+      return new Response(body, { status: Array.isArray(status) ? status.shift() ?? 200 : status });
     },
   };
   vm.runInNewContext(source, context);
@@ -142,6 +142,18 @@ test("Rust parses provider, empty, blocked and malformed responses", async () =>
   assert.match((await runtime({ body: sse("not JSON") }).explain({ selection: "word" }))[0].error, /unreadable/);
   assert.match((await runtime({ body: sse({ candidates: [{ finishReason: "MAX_TOKENS" }] }) }).explain({ selection: "word" }))[0].error, /no explanation/);
   assert.match((await runtime({ body: sse({ promptFeedback: { blockReason: "SAFETY" } }) }).explain({ selection: "word" }))[0].error, /declined/);
+});
+
+test("an overloaded model falls back to the second model once", async () => {
+  const app = runtime({ status: [503] });
+  assert.deepEqual((await app.explain({ selection: "word" })).at(-1), { done: true });
+  assert.deepEqual(app.sent.map(([url]) => url.match(/models\/([^:]+)/)[1]), ["gemini-3.8-flash", "gemini-3.6-flash"]);
+  const busy = runtime({ status: [503, 503], body: '{"error":{"message":"This model is currently experiencing high demand."}}' });
+  assert.match((await busy.explain({ selection: "word" }))[0].error, /high demand/);
+  assert.equal(busy.sent.length, 2);
+  const limited = runtime({ status: 429, body: "{}" });
+  await limited.explain({ selection: "word" });
+  assert.equal(limited.sent.length, 1);
 });
 
 test("save-key stores only the key, in session storage", async () => {

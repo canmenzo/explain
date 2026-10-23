@@ -1,5 +1,6 @@
 const api = globalThis.browser ?? globalThis.chrome;
-const MODEL = "gemini-3.8-flash";
+// The second model is tried when the first is overloaded.
+const MODELS = ["gemini-3.8-flash", "gemini-3.6-flash"];
 const MENU_ID = "explain-selection";
 let corePromise;
 
@@ -54,20 +55,24 @@ async function stream(message, send, signal) {
   };
   const { geminiKey } = await api.storage.session.get("geminiKey");
   if (!geminiKey) return fail("Add your Google Gemini API key first. Click the Explain icon in your toolbar.");
-  const request = core.buildRequest(
-    MODEL,
-    typeof message.title === "string" ? message.title : "",
-    typeof message.context === "string" ? message.context : "",
-    selection,
-  );
-  if (request.error) return fail(request.error);
-  const { model, ...body } = request;
-  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "x-goog-api-key": geminiKey },
-    body: JSON.stringify(body),
-    signal,
-  });
+  let response;
+  for (const [index, name] of MODELS.entries()) {
+    const request = core.buildRequest(
+      name,
+      typeof message.title === "string" ? message.title : "",
+      typeof message.context === "string" ? message.context : "",
+      selection,
+    );
+    if (request.error) return fail(request.error);
+    const { model, ...body } = request;
+    response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-goog-api-key": geminiKey },
+      body: JSON.stringify(body),
+      signal,
+    });
+    if (response.ok || ![500, 503].includes(response.status) || index === MODELS.length - 1) break;
+  }
   if (!response.ok) return fail(core.parseResponse(response.status, await response.text()).error);
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
