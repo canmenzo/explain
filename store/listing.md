@@ -26,7 +26,7 @@ Explain helps you understand what you are reading without leaving the page.
 Select a word or passage, right-click it, and choose Explain. A small card opens beside your selection and the answer streams in as Google Gemini writes it: a short, plain explanation of what the text means in its context. If the selection names a person, place, organization, or work, the explanation says who or what it is when the text makes that clear.
 
 How it works
-- Click the Explain icon in the toolbar once and paste your own Google Gemini API key from Google AI Studio. The key is the only thing Explain stores. It stays in browser session memory and is cleared when the browser closes.
+- Click the Explain icon in the toolbar once and paste your own Google Gemini API key from Google AI Studio. The key is the only thing Explain stores. It is saved in this browser only, is never synced, and is deleted when Explain is removed.
 - Select text on any page, right-click, and choose Explain. Explain runs only when you choose it from the menu, and only on that tab.
 - The card shows what you selected, a quiet loading state, and then the answer as it arrives. If a request fails, the card says why and offers Try again.
 - Close the card with its close button, the Escape key, or a click outside it. Long answers scroll inside the card. The interface follows your system's reduced motion setting.
@@ -96,7 +96,7 @@ Used to inject the extension's own bundled content script (content.js) into the 
 **storage**
 
 ```
-Used with chrome.storage.session only, to keep the user's Gemini API key for the current browser session so they do not have to re-enter it on every request. The key is the only value stored. Session storage is held in memory, is not synced, and is cleared when the browser closes. Nothing is written to local or sync storage.
+Used with chrome.storage.local only, to keep the user's Gemini API key on this device so they do not have to re-enter it. The key is the only value stored. It is not synced and is deleted when the extension is removed. Nothing is written to sync storage.
 ```
 
 **Host permission: https://generativelanguage.googleapis.com/\***
@@ -122,7 +122,7 @@ What user data the extension collects or transmits (check these boxes):
 | Personally identifiable information | No | |
 | Health information | No | |
 | Financial and payment information | No | |
-| Authentication information | **Yes** | The user's Google Gemini API key. Stored in chrome.storage.session for the browser session and sent only to generativelanguage.googleapis.com in the `x-goog-api-key` header to authenticate the request the user asked for. |
+| Authentication information | **Yes** | The user's Google Gemini API key. Stored in chrome.storage.local on the device and sent only to generativelanguage.googleapis.com in the `x-goog-api-key` header to authenticate the request the user asked for. |
 | Personal communications | No | |
 | Location | No | |
 | Web history | No | The page URL is not read or sent. |

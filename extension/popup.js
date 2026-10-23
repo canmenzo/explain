@@ -41,11 +41,11 @@ function setVisible(visible) {
   toggleKey.setAttribute("aria-pressed", String(visible));
 }
 
-api.storage.session.get("geminiKey").then((value) => {
+api.storage.local.get("geminiKey").then((value) => {
   render(value.geminiKey ? "ready" : "setup");
 }).catch(() => {
   render("setup");
-  showStatus("Could not read this session. Reopen Explain to try again.", "error");
+  showStatus("Could not read your saved key. Reopen Explain to try again.", "error");
 });
 
 toggleKey.addEventListener("click", () => setVisible(input.type === "password"));

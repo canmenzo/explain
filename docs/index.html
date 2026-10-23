@@ -97,7 +97,7 @@
 <div class="facts">
 <div class="card rv"><h3>What is sent</h3><ul><li>The text you selected</li><li>The paragraph around it</li><li>The page title</li><li>Your API key, to authenticate the request</li></ul></div>
 <div class="card rv"><h3>What is never sent</h3><ul><li>The page address</li><li>The page's HTML</li><li>Anything from tabs where you did not choose Explain</li></ul></div>
-<div class="card rv"><h3>What is stored</h3><ul><li>Only your API key, in browser session memory</li><li>Cleared when the browser closes</li><li>Answers are shown, then discarded</li></ul></div>
+<div class="card rv"><h3>What is stored</h3><ul><li>Only your API key, in this browser</li><li>Never synced to other devices</li><li>Answers are shown, then discarded</li></ul></div>
 </div>
 <p class="note rv"><strong>Free tier.</strong> Google may use free-tier requests to improve its products, so avoid sensitive text. Read the <a href="privacy.html">privacy policy</a>.</p>
 </section>
@@ -120,7 +120,7 @@
 <h2 class="rv">Questions people ask</h2>
 <details class="rv"><summary>Does it cost anything?</summary><p>Explain is free and MIT licensed. A Gemini key from Google AI Studio is free too, with rate limits. See <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API pricing</a>.</p></details>
 <details class="rv"><summary>What exactly is sent, and to whom?</summary><p>The selected text, the paragraph around it and the page title, sent straight to <code>generativelanguage.googleapis.com</code>. Never the page address or HTML.</p></details>
-<details class="rv"><summary>Why do I paste my key again after restarting the browser?</summary><p>The key lives only in session memory and is never written to disk, so it clears when the browser closes.</p></details>
+<details class="rv"><summary>Where is my key kept?</summary><p>In the extension's local storage in this browser. It is not synced, and removing Explain deletes it.</p></details>
 <details class="rv"><summary>What if I choose Explain before adding a key?</summary><p>The card asks for a key and the key popup opens where the browser allows it.</p></details>
 <details class="rv"><summary>Which browsers are supported?</summary><p>Chrome, and Firefox 140 or newer, on desktop.</p></details>
 <details class="rv"><summary>Which model writes the answers?</summary><p>Gemini 3.8 Flash, without Google Search.</p></details>

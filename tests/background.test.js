@@ -25,7 +25,7 @@ function runtime({ key = "test-key", body = sse(textChunk("A clear "), textChunk
     runtime: { onInstalled: event("installed"), onMessage: event("message"), onConnect: event("connect"), getURL(path) { return path; } },
     contextMenus: { onClicked: event("clicked"), async removeAll() { menus.length = 0; }, create(item) { menus.push(item); } },
     action: { async openPopup() { popupOpened = true; } },
-    storage: { session: { async set(value) { Object.assign(stored, value); }, async get() { return key ? { geminiKey: key } : {}; } } },
+    storage: { local: { async set(value) { Object.assign(stored, value); }, async get() { return key ? { geminiKey: key } : {}; } } },
     tabs: { async sendMessage(tabId, message, options) { messages.push({ tabId, message, options }); } },
     scripting: {
       async executeScript(value) {
@@ -156,8 +156,8 @@ test("an overloaded model falls back to the second model once", async () => {
   assert.equal(limited.sent.length, 1);
 });
 
-test("save-key stores only the key, in session storage", async () => {
+test("save-key stores only the key, in local storage", async () => {
   const app = runtime();
-  assert.equal((await app.handle({ type: "save-key", key: "session-key" })).ok, true);
-  assert.deepEqual({ ...app.stored }, { geminiKey: "session-key" });
+  assert.equal((await app.handle({ type: "save-key", key: "saved-key" })).ok, true);
+  assert.deepEqual({ ...app.stored }, { geminiKey: "saved-key" });
 });

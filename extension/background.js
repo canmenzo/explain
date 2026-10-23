@@ -10,7 +10,7 @@ api.runtime.onInstalled.addListener(() => api.contextMenus.removeAll().then(() =
 
 api.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId !== MENU_ID || tab?.id === undefined) return;
-  const { geminiKey } = await api.storage.session.get("geminiKey");
+  const { geminiKey } = await api.storage.local.get("geminiKey");
   if (!geminiKey) api.action.openPopup?.()?.catch(() => {});
   const message = { type: "explain", selection: info.selectionText ?? "" };
   // Selections inside cross-origin frames are outside activeTab, so fall back to the top frame.
@@ -25,7 +25,7 @@ api.contextMenus.onClicked.addListener(async (info, tab) => {
 
 api.runtime.onMessage.addListener((message) => {
   if (message?.type === "save-key" && typeof message.key === "string") {
-    return api.storage.session.set({ geminiKey: message.key }).then(() => ({ ok: true }));
+    return api.storage.local.set({ geminiKey: message.key }).then(() => ({ ok: true }));
   }
 });
 
@@ -53,7 +53,7 @@ async function stream(message, send, signal) {
     core.transition(requesting, 4);
     send({ error });
   };
-  const { geminiKey } = await api.storage.session.get("geminiKey");
+  const { geminiKey } = await api.storage.local.get("geminiKey");
   if (!geminiKey) return fail("Add your Google Gemini API key first. Click the Explain icon in your toolbar.");
   let response;
   for (const [index, name] of MODELS.entries()) {

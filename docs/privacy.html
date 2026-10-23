@@ -53,13 +53,13 @@
 <p>Explain does not send the page address, the page's HTML, or anything from pages where you have not chosen Explain.</p>
 
 <h2>What Explain stores</h2>
-<p>Your API key is kept in the browser's extension session storage (<code>chrome.storage.session</code>). It stays in memory, is never written to disk by Explain, and is cleared when the browser closes. Explain stores nothing else: selections and explanations are shown on the page and discarded.</p>
+<p>Your API key is kept in the browser's extension local storage (<code>chrome.storage.local</code>) on this device. It is not synced and is deleted when you remove Explain. Explain stores nothing else: selections and explanations are shown on the page and discarded.</p>
 
 <h2>Permissions</h2>
 <ul>
 <li><code>contextMenus</code>: add Explain to the right-click menu when text is selected.</li>
 <li><code>activeTab</code> and <code>scripting</code>: show the explanation card on the current tab, only after you choose Explain from that menu.</li>
-<li><code>storage</code>: keep your API key for the browser session.</li>
+<li><code>storage</code>: keep your API key on this device.</li>
 <li>Access to <code>generativelanguage.googleapis.com</code>: send Explain requests to Google Gemini.</li>
 </ul>
 

@@ -18,7 +18,7 @@ Firefox 140+: load `manifest.json` from `explain-firefox.zip` in `about:debuggin
 
 ## Privacy
 
-Only the selection, the paragraph around it and the page title go to Google's Gemini API, straight from your browser. No servers, no account, no analytics. Your key lives in session memory and clears when the browser closes. On Google's free tier, Google may use requests to improve its products.
+Only the selection, the paragraph around it and the page title go to Google's Gemini API, straight from your browser. No servers, no account, no analytics. Your key is saved in this browser only, never synced. On Google's free tier, Google may use requests to improve its products.
 
 ## Develop
 

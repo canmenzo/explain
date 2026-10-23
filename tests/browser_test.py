@@ -254,7 +254,7 @@ async def popup_fixture(browser_type):
         async def serve(route):
             await route.fulfill(path=str(ROOT / "extension" / route.request.url.rsplit("/", 1)[-1]))
         await page.route("http://popup.test/*", serve)
-        await page.add_init_script("""window.pending=[];window.chrome={storage:{session:{get:async()=>({}),set:async()=>{}}},
+        await page.add_init_script("""window.pending=[];window.chrome={storage:{local:{get:async()=>({}),set:async()=>{}}},
           runtime:{sendMessage:message=>new Promise((resolve,reject)=>window.pending.push({message,resolve,reject}))}};""")
         await page.goto("http://popup.test/popup.html")
         form = page.locator("#key-form")
@@ -341,10 +341,10 @@ async def chromium_extension_smoke(playwright):
             popup = await context.new_page()
             await popup.goto(f"chrome-extension://{extension_id}/popup.html")
             await popup.get_by_role("heading", name="Explain", exact=True).wait_for()
-            await popup.locator("#api-key").fill("session-test-key")
+            await popup.locator("#api-key").fill("saved-test-key")
             await popup.get_by_role("button", name="Save key").click()
             await expect(popup.locator("#ready")).to_be_visible()
-            assert await popup.evaluate("chrome.storage.session.get(null)") == {"geminiKey": "session-test-key"}
+            assert await popup.evaluate("chrome.storage.local.get(null)") == {"geminiKey": "saved-test-key"}
             stream = """selection => new Promise(resolve => {
               const port = chrome.runtime.connect({name: 'explain'});
               const received = [];
@@ -360,7 +360,7 @@ async def chromium_extension_smoke(playwright):
             await expect(popup.locator("#ready")).to_contain_text("Ready to explain")
             await expect(popup.locator("#key-form")).to_be_hidden()
             await evidence(popup, "chromium-extension-popup.png")
-            print("PASS Chromium unpacked extension: popup session save and reload, Rust core in the service worker")
+            print("PASS Chromium unpacked extension: popup key save and reload, Rust core in the service worker")
         finally:
             await context.close()
 
