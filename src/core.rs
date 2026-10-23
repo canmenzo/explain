@@ -4,6 +4,9 @@ use std::str;
 
 const SELECTION_LIMIT: usize = 12_000;
 const MODEL_LIMIT: usize = 100;
+const TERM_CHARS: usize = 40;
+const TERM_WORDS: usize = 3;
+const TERM_RADIUS: usize = 200;
 const MODELS: [&str; 4] = [
     "gemini-3.8-flash",
     "gemini-3.6-flash",
@@ -39,6 +42,28 @@ fn valid_selection(text: &str) -> bool {
     !text.trim().is_empty() && text.chars().count() <= SELECTION_LIMIT
 }
 
+// A word or short phrase gets a quick definition instead of a full read of the passage.
+fn is_term(text: &str) -> bool {
+    let text = text.trim();
+    !text.is_empty()
+        && text.chars().count() <= TERM_CHARS
+        && text.split_whitespace().count() <= TERM_WORDS
+}
+
+fn around<'a>(context: &'a str, term: &str) -> &'a str {
+    let Some(index) = context.find(term) else {
+        return clipped(context, TERM_RADIUS * 2);
+    };
+    let start = context[..index]
+        .char_indices()
+        .rev()
+        .nth(TERM_RADIUS - 1)
+        .map(|(start, _)| start)
+        .unwrap_or(0);
+    let after = index + term.len();
+    &context[start..after + clipped(&context[after..], TERM_RADIUS).len()]
+}
+
 fn write(output: &mut [u8], value: &Value) -> usize {
     let Ok(bytes) = serde_json::to_vec(value) else {
         return 0;
@@ -53,6 +78,11 @@ fn write(output: &mut [u8], value: &Value) -> usize {
 #[no_mangle]
 pub unsafe extern "C" fn selection_is_valid(pointer: *const u8, length: usize) -> u32 {
     input(pointer, length).map(valid_selection).unwrap_or(false) as u32
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn selection_is_term(pointer: *const u8, length: usize) -> u32 {
+    input(pointer, length).map(is_term).unwrap_or(false) as u32
 }
 
 #[no_mangle]
@@ -81,19 +111,32 @@ fn request_value(
     if !valid_selection(selection) {
         return Err("Select some text first.");
     }
-    let prompt = format!(
-        "You help a reader understand a passage on a web page. In plain language and two or three short sentences, explain or summarize what the selected text means in its surrounding context. When it refers to someone or something specific, say who or what that is, but only if the context makes it clear. Spell out jargon, idioms, and figurative language. Stick to what the text supports; never guess at facts. Reply in plain text without Markdown.\n\nPage: {}\n\nNearby text:\n{}\n\nSelected text:\n{}",
-        clipped(title, 300),
-        clipped(context, 5000),
-        selection
-    );
+    let term = is_term(selection);
+    let prompt = if term {
+        let term = selection.trim();
+        format!(
+            "You help a reader understand a word or short phrase on a web page. In plain language and one or two short sentences, say what it means. If it is slang, an idiom, an acronym, or jargon, say so. Use the nearby text only to pick the right sense; never guess at facts. Reply in plain text without Markdown.\n\nPage: {}\n\nNearby text:\n{}\n\nSelected text:\n{}",
+            clipped(title, 300),
+            around(context, term),
+            term
+        )
+    } else {
+        format!(
+            "You help a reader understand a passage on a web page. In plain language and two or three short sentences, explain or summarize what the selected text means in its surrounding context. When it refers to someone or something specific, say who or what that is, but only if the context makes it clear. Spell out jargon, idioms, and figurative language. Stick to what the text supports; never guess at facts. Reply in plain text without Markdown.\n\nPage: {}\n\nNearby text:\n{}\n\nSelected text:\n{}",
+            clipped(title, 300),
+            clipped(context, 5000),
+            selection
+        )
+    };
+    // gemini-3.8-flash does not accept "minimal".
+    let thinking = if term && model == "gemini-3.6-flash" { "minimal" } else { "low" };
     Ok(json!({
         "model": model,
         "contents": [{ "parts": [{ "text": prompt }] }],
         "generationConfig": {
             "temperature": 0.4,
             "maxOutputTokens": 2048,
-            "thinkingConfig": { "thinkingLevel": "low" }
+            "thinkingConfig": { "thinkingLevel": thinking }
         }
     }))
 }
@@ -249,16 +292,34 @@ mod tests {
             "gemini-3.8-flash",
             "page",
             &"猫".repeat(5002),
-            "selected \"quoted\" text",
+            "the selected \"quoted\" text here",
         )
         .unwrap();
         let prompt = payload["contents"][0]["parts"][0]["text"].as_str().unwrap();
         assert_eq!(prompt.matches('猫').count(), 5000);
-        assert!(prompt.contains("selected \"quoted\" text"));
+        assert!(prompt.contains("the selected \"quoted\" text here"));
         assert_eq!(payload["generationConfig"]["maxOutputTokens"], 2048);
         assert_eq!(payload["generationConfig"]["thinkingConfig"]["thinkingLevel"], "low");
         assert!(request_value("bad-model", "", "", "word").is_err());
         assert!(request_value("gemini-3.8-flash", "", "", " ").is_err());
+    }
+
+    #[test]
+    fn short_terms_get_a_quick_request_with_nearby_text_only() {
+        assert!(is_term(" THICC "));
+        assert!(is_term("bank run"));
+        assert!(!is_term("one two three four"));
+        assert!(!is_term(&"a".repeat(TERM_CHARS + 1)));
+        let context = format!("{}THICC{}", "猫".repeat(500), "x".repeat(500));
+        assert_eq!(around(&context, "THICC").chars().count(), TERM_RADIUS * 2 + 5);
+        assert_eq!(around("short THICC text", "THICC"), "short THICC text");
+        let payload = request_value("gemini-3.6-flash", "", &context, "THICC").unwrap();
+        let prompt = payload["contents"][0]["parts"][0]["text"].as_str().unwrap();
+        assert_eq!(prompt.matches('猫').count(), TERM_RADIUS);
+        assert!(prompt.contains("word or short phrase"));
+        assert_eq!(payload["generationConfig"]["thinkingConfig"]["thinkingLevel"], "minimal");
+        let payload = request_value("gemini-3.8-flash", "", &context, "THICC").unwrap();
+        assert_eq!(payload["generationConfig"]["thinkingConfig"]["thinkingLevel"], "low");
     }
 
     #[test]

@@ -97,14 +97,23 @@ test("menu click falls back to the top frame and opens setup without a key", asy
 
 test("compiled Rust builds a streaming Gemini request and parses each chunk", async () => {
   const app = runtime();
-  const received = await app.explain({ selection: "selected phrase", context: "nearby words", title: "Page" });
+  const received = await app.explain({ selection: "a longer selected phrase", context: "nearby words", title: "Page" });
   assert.deepEqual(received, [{ text: "A clear " }, { text: "explanation." }, { done: true }]);
   assert.equal(app.sent[0][0], "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:streamGenerateContent?alt=sse");
   assert.equal(app.sent[0][1].headers["x-goog-api-key"], "test-key");
   const body = JSON.parse(app.sent[0][1].body);
   assert.equal(body.generationConfig.thinkingConfig.thinkingLevel, "low");
-  assert.match(body.contents[0].parts[0].text, /selected phrase/);
+  assert.match(body.contents[0].parts[0].text, /a longer selected phrase/);
   assert.match(body.contents[0].parts[0].text, /nearby words/);
+});
+
+test("a short term goes to 3.6 Flash with minimal thinking and only nearby text", async () => {
+  const app = runtime();
+  await app.explain({ selection: "THICC", context: `${"a ".repeat(1000)}THICC${" b".repeat(1000)}`, title: "Page" });
+  assert.match(app.sent[0][0], /models\/gemini-3\.6-flash:/);
+  const body = JSON.parse(app.sent[0][1].body);
+  assert.equal(body.generationConfig.thinkingConfig.thinkingLevel, "minimal");
+  assert.ok(body.contents[0].parts[0].text.length < 1000);
 });
 
 test("stream events split across network reads and thought parts are handled", async () => {
@@ -146,8 +155,11 @@ test("Rust parses provider, empty, blocked and malformed responses", async () =>
 
 test("an overloaded model falls back to the second model once", async () => {
   const app = runtime({ status: [503] });
-  assert.deepEqual((await app.explain({ selection: "word" })).at(-1), { done: true });
+  assert.deepEqual((await app.explain({ selection: "a longer passage of text" })).at(-1), { done: true });
   assert.deepEqual(app.sent.map(([url]) => url.match(/models\/([^:]+)/)[1]), ["gemini-3.8-flash", "gemini-3.6-flash"]);
+  const term = runtime({ status: [503] });
+  await term.explain({ selection: "word" });
+  assert.deepEqual(term.sent.map(([url]) => url.match(/models\/([^:]+)/)[1]), ["gemini-3.6-flash", "gemini-3.8-flash"]);
   const busy = runtime({ status: [503, 503], body: '{"error":{"message":"This model is currently experiencing high demand."}}' });
   assert.match((await busy.explain({ selection: "word" }))[0].error, /high demand/);
   assert.equal(busy.sent.length, 2);

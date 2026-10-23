@@ -1,6 +1,7 @@
 const api = globalThis.browser ?? globalThis.chrome;
-// The second model is tried when the first is overloaded.
+// The second model is tried when the first is overloaded. Short terms start on 3.6, which allows minimal thinking.
 const MODELS = ["gemini-3.8-flash", "gemini-3.6-flash"];
+const TERM_MODELS = ["gemini-3.6-flash", "gemini-3.8-flash"];
 const MENU_ID = "explain-selection";
 let corePromise;
 
@@ -55,8 +56,9 @@ async function stream(message, send, signal) {
   };
   const { geminiKey } = await api.storage.local.get("geminiKey");
   if (!geminiKey) return fail("Add your Google Gemini API key first. Click the Explain icon in your toolbar.");
+  const models = core.isTerm(selection) ? TERM_MODELS : MODELS;
   let response;
-  for (const [index, name] of MODELS.entries()) {
+  for (const [index, name] of models.entries()) {
     const request = core.buildRequest(
       name,
       typeof message.title === "string" ? message.title : "",
@@ -71,7 +73,7 @@ async function stream(message, send, signal) {
       body: JSON.stringify(body),
       signal,
     });
-    if (response.ok || ![500, 503].includes(response.status) || index === MODELS.length - 1) break;
+    if (response.ok || ![500, 503].includes(response.status) || index === models.length - 1) break;
   }
   if (!response.ok) return fail(core.parseResponse(response.status, await response.text()).error);
   const reader = response.body.getReader();
@@ -128,18 +130,21 @@ function makeCore(wasm) {
     }
   }
 
+  function check(name, text) {
+    const bytes = encoder.encode(text);
+    const pointer = wasm.allocate(bytes.length) >>> 0;
+    try {
+      new Uint8Array(wasm.memory.buffer).set(bytes, pointer);
+      return wasm[name](pointer, bytes.length) === 1;
+    } finally {
+      wasm.release(pointer, bytes.length);
+    }
+  }
+
   return {
     transition: wasm.transition,
-    isValidSelection(text) {
-      const bytes = encoder.encode(text);
-      const pointer = wasm.allocate(bytes.length) >>> 0;
-      try {
-        new Uint8Array(wasm.memory.buffer).set(bytes, pointer);
-        return wasm.selection_is_valid(pointer, bytes.length) === 1;
-      } finally {
-        wasm.release(pointer, bytes.length);
-      }
-    },
+    isValidSelection: (text) => check("selection_is_valid", text),
+    isTerm: (text) => check("selection_is_term", text),
     buildRequest(model, title, context, selection) {
       return invokeJson("build_request", [], [model, title, context, selection]);
     },
