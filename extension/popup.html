@@ -24,7 +24,6 @@
             <p>Your key is saved.</p>
           </div>
         </div>
-        <p class="usage">Select text on any page, right-click it, and choose <strong>Explain</strong>.</p>
         <button id="replace" class="quiet" type="button" aria-controls="key-form" aria-expanded="false">Replace key</button>
       </section>
       <form id="key-form" class="panel" novalidate hidden>
@@ -33,7 +32,7 @@
           <a class="help" href="https://aistudio.google.com/apikey" target="_blank" rel="noreferrer">Get a free key<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 4.5h6v6M11.25 4.75 4.5 11.5"/></svg></a>
         </div>
         <div class="key-input">
-          <input id="api-key" name="apiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your key" required aria-describedby="key-error key-hint">
+          <input id="api-key" name="apiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your key" required aria-describedby="key-error">
           <button id="toggle-key" type="button" aria-label="Show API key" aria-controls="api-key" aria-pressed="false">
             <svg class="eye" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.75 8S4 3.75 8 3.75 14.25 8 14.25 8 12 12.25 8 12.25 1.75 8 1.75 8Z"/><circle cx="8" cy="8" r="1.9"/></svg>
             <svg class="eye-off" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.4 4a6.6 6.6 0 0 1 1.6-.25C12 3.75 14.25 8 14.25 8a11 11 0 0 1-1.6 2.1M4.2 5.1A10.6 10.6 0 0 0 1.75 8S4 12.25 8 12.25a6.2 6.2 0 0 0 3.1-.85M6.65 6.65a1.9 1.9 0 0 0 2.7 2.7M2.5 2.5l11 11"/></svg>
@@ -46,7 +45,6 @@
         </div>
       </form>
       <p id="status" role="status" aria-live="polite"></p>
-      <p id="key-hint" class="hint"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.75"/><path d="M5.5 7V5.25a2.5 2.5 0 0 1 5 0V7"/></svg><span>Your key is saved in this browser only and is never synced. On Google's free tier, what you send may be used to improve Google's products.</span></p>
     </main>
   </body>
 </html>

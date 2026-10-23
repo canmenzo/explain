@@ -290,7 +290,6 @@ async def popup_fixture(browser_type):
         assert await page.evaluate("window.pending.at(-1).message") == {"type": "save-key", "key": "fixture-test-key"}
         await page.evaluate("window.pending.at(-1).resolve({ok:true})")
         await expect(ready).to_be_visible()
-        await expect(ready).to_contain_text("right-click")
         await expect(form).to_be_hidden()
         await expect(page.locator("#status")).to_have_text("Key saved.")
         await expect(page.locator("#api-key")).to_have_value("")

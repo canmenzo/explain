@@ -82,7 +82,7 @@ iframe{display:block;width:100%;height:644px;border:0}
 STUB = """(() => {
   window.ports = [];
   window.chrome = {
-    storage: {session: {get: async () => ({})}},
+    storage: {local: {get: async () => ({})}},
     runtime: {
       onMessage: {addListener(fn) { window.menu = selection => fn({type: 'explain', selection}); }},
       sendMessage: () => new Promise(() => {}),
