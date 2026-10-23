@@ -255,13 +255,19 @@ async def popup_fixture(browser_type):
             await route.fulfill(path=str(ROOT / "extension" / route.request.url.rsplit("/", 1)[-1]))
         await page.route("http://popup.test/*", serve)
         await page.add_init_script("""window.pending=[];window.chrome={storage:{local:{get:async()=>({}),set:async()=>{}}},
-          runtime:{sendMessage:message=>new Promise((resolve,reject)=>window.pending.push({message,resolve,reject}))}};""")
+          runtime:{getManifest:()=>({version:"1.1.0"}),reload:()=>{window.reloaded=true;},
+            sendMessage:message=>new Promise((resolve,reject)=>window.pending.push({message,resolve,reject}))},
+          management:{getSelf:async()=>({installType:"development"})}};""")
+        release = {"tag_name": "v1.1.0", "html_url": "https://github.com/canmenzo/explain/releases/tag/v1.1.0", "assets": []}
+        await page.route("https://api.github.com/repos/canmenzo/explain/releases/latest", lambda route: route.fulfill(json=release))
         await page.goto("http://popup.test/popup.html")
         form = page.locator("#key-form")
         ready = page.locator("#ready")
         await expect(page.locator("#api-key")).to_be_focused()
         await expect(form).to_be_visible()
         await expect(ready).to_be_hidden()
+        await expect(page.locator(".version")).to_have_text("v1.1.0 · Check for updates")
+        await expect(page.locator("#update")).to_be_hidden()
         await expect(page.get_by_role("link", name="Get a free key")).to_have_attribute("href", "https://aistudio.google.com/apikey")
         assert await page.locator("select, #model, .how, ol").count() == 0
         # Chrome caps popups at 600px; leave room for the validation message.
@@ -322,7 +328,26 @@ async def popup_fixture(browser_type):
         await page.get_by_role("button", name="Replace key").click()
         await page.get_by_role("button", name="Show API key").click()
         assert await page.evaluate("document.getAnimations().filter(animation => animation.playState === 'running').length") == 0
-        print(f"PASS {browser_type.name}: popup setup ({height:.0f}px), width, validation, save, ready state, replace, errors, reduced motion")
+
+        # A newer GitHub release shows the update notice with links to that release only.
+        release.update(tag_name="v1.2.0", html_url="https://github.com/canmenzo/explain/releases/tag/v1.2.0",
+                       assets=[{"name": "explain-chrome.zip", "browser_download_url": "https://github.com/canmenzo/explain/releases/download/v1.2.0/explain-chrome.zip"}])
+        await page.emulate_media(reduced_motion="no-preference")
+        await page.get_by_role("button", name="Cancel").click()
+        await page.get_by_role("link", name="Check for updates").click()
+        await expect(page.locator("#check-update")).to_have_text("Update available")
+        await expect(page.locator("#update-title")).to_have_text("Version 1.2.0 is available")
+        await expect(page.get_by_role("link", name="Download zip")).to_have_attribute("href", release["assets"][0]["browser_download_url"])
+        await expect(page.get_by_role("link", name="What's new")).to_have_attribute("href", release["html_url"])
+        height = await page.locator("main").evaluate("element => element.getBoundingClientRect().height")
+        assert height <= 576, height
+        await evidence(page, f"{browser_type.name}-popup-update.png", full_page=True)
+        await page.get_by_role("button", name="Reload Explain").click()
+        assert await page.evaluate("window.reloaded")
+        release.update(html_url="https://evil.test/", assets=[{"name": "explain-chrome.zip", "browser_download_url": "https://evil.test/x.zip"}])
+        await page.get_by_role("link", name="Update available").click()
+        await expect(page.get_by_role("link", name="Download zip")).to_have_attribute("href", "https://github.com/canmenzo/explain/releases")
+        print(f"PASS {browser_type.name}: popup setup ({height:.0f}px), width, validation, save, ready state, replace, errors, reduced motion, update check")
     finally:
         await browser.close()
 
@@ -343,7 +368,8 @@ async def chromium_extension_smoke(playwright):
             await popup.locator("#api-key").fill("saved-test-key")
             await popup.get_by_role("button", name="Save key").click()
             await expect(popup.locator("#ready")).to_be_visible()
-            assert await popup.evaluate("chrome.storage.local.get(null)") == {"geminiKey": "saved-test-key"}
+            assert (await popup.evaluate("chrome.storage.local.get('geminiKey')")) == {"geminiKey": "saved-test-key"}
+            await expect(popup.locator("#update-check")).to_be_visible()
             stream = """selection => new Promise(resolve => {
               const port = chrome.runtime.connect({name: 'explain'});
               const received = [];

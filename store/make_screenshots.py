@@ -85,6 +85,7 @@ STUB = """(() => {
     storage: {local: {get: async () => ({})}},
     runtime: {
       onMessage: {addListener(fn) { window.menu = selection => fn({type: 'explain', selection}); }},
+      getManifest: () => ({version: '1.2.0'}),
       sendMessage: () => new Promise(() => {}),
       connect() {
         const port = {listeners: [], postMessage() {}, disconnect() {},

@@ -37,7 +37,7 @@
 <main id="main" class="doc">
 <p class="eyebrow">Privacy</p>
 <h1>Privacy policy</h1>
-<p class="meta">Effective October 22, 2026. This policy covers the Explain browser extension.</p>
+<p class="meta">Effective October 23, 2026. This policy covers the Explain browser extension.</p>
 
 <p>Explain has no servers of its own. It does not collect analytics, telemetry or usage data, and it does not sell or share your data with anyone.</p>
 
@@ -47,13 +47,16 @@
 <li>the text you selected (up to 12,000 characters);</li>
 <li>the nearby text from the paragraph, list item, heading or table cell that contains the selection (up to 5,000 characters);</li>
 <li>the page title (up to 300 characters);</li>
-<li>the name of the Gemini model Explain uses (Gemini 3.8 Flash);</li>
+<li>the name of the Gemini model Explain uses (Gemini 3.8 Flash, or Gemini 3.6 Flash for single words and short phrases);</li>
 <li>your Gemini API key, which authenticates the request.</li>
 </ul>
 <p>Explain does not send the page address, the page's HTML, or anything from pages where you have not chosen Explain.</p>
 
+<h2>Update checks</h2>
+<p>Copies installed from the GitHub zip, not from a browser store, ask GitHub (<code>api.github.com</code>) for the latest release when you open the popup, at most every six hours, or when you choose <strong>Check for updates</strong>. That request carries no selection, page data or key. Store installs update through the store and never make it.</p>
+
 <h2>What Explain stores</h2>
-<p>Your API key is kept in the browser's extension local storage (<code>chrome.storage.local</code>) on this device. It is not synced and is deleted when you remove Explain. Explain stores nothing else: selections and explanations are shown on the page and discarded.</p>
+<p>Your API key is kept in the browser's extension local storage (<code>chrome.storage.local</code>) on this device. It is not synced and is deleted when you remove Explain. Copies installed from the GitHub zip also keep the result of the last update check there (the latest version number, its download link and when it was checked). Selections and explanations are shown on the page and discarded.</p>
 
 <h2>Permissions</h2>
 <ul>
@@ -61,6 +64,7 @@
 <li><code>activeTab</code> and <code>scripting</code>: show the explanation card on the current tab, only after you choose Explain from that menu.</li>
 <li><code>storage</code>: keep your API key on this device.</li>
 <li>Access to <code>generativelanguage.googleapis.com</code>: send Explain requests to Google Gemini.</li>
+<li><code>api.github.com</code> (allowed in the extension's content security policy, not a permission): check for a new release in copies installed from the GitHub zip.</li>
 </ul>
 
 <h2>Google's terms</h2>

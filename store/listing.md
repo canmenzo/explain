@@ -110,7 +110,7 @@ Required to call the Google Gemini API (generativelanguage.googleapis.com, model
 Answer: **No, I am not using remote code.**
 
 ```
-All JavaScript, HTML, CSS, and the WebAssembly module (core.wasm, compiled from the Rust source in the repository) are bundled in the package and loaded from the extension itself via chrome.runtime.getURL. The 'wasm-unsafe-eval' CSP keyword is present only so the bundled core.wasm can be instantiated. The extension does not load scripts or wasm from any server and does not use eval. The only network request is a JSON call to the Gemini API, whose plain text response is displayed, never executed.
+All JavaScript, HTML, CSS, and the WebAssembly module (core.wasm, compiled from the Rust source in the repository) are bundled in the package and loaded from the extension itself via chrome.runtime.getURL. The 'wasm-unsafe-eval' CSP keyword is present only so the bundled core.wasm can be instantiated. The extension does not load scripts or wasm from any server and does not use eval. The only network request is a JSON call to the Gemini API, whose plain text response is displayed, never executed. The CSP also allows api.github.com: copies loaded unpacked from the GitHub release zip (installType "development") check it for a newer release version. Installs from the Chrome Web Store never make that request.
 ```
 
 ### Data usage

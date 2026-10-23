@@ -16,6 +16,10 @@
 
 Firefox 140+: load `manifest.json` from `explain-firefox.zip` in `about:debugging#/runtime/this-firefox`.
 
+## Update
+
+Copies installed from the zip check GitHub for a new release when you open the popup. When one is out, download the new zip, unzip it over your Explain folder and click **Reload Explain** in the notice. Your key is kept.
+
 ## Privacy
 
 Only the selection, the paragraph around it and the page title go to Google's Gemini API, straight from your browser. No servers, no account, no analytics. Your key is saved in this browser only, never synced. On Google's free tier, Google may use requests to improve its products.
