@@ -20,6 +20,8 @@ for (const browser of ["chrome", "firefox"]) {
   await cp(join(root, "extension"), target, { recursive: true });
   await cp(join(root, "target", "wasm32-unknown-unknown", "release", "explain_core.wasm"), join(target, "core.wasm"));
   await cp(join(root, `manifests/${browser}.json`), join(target, "manifest.json"));
+  await cp(join(root, "LICENSE"), join(target, "LICENSE"));
+  await cp(join(root, "THIRD_PARTY_NOTICES"), join(target, "THIRD_PARTY_NOTICES"));
   await exec(tar, ["-a", "-cf", join(dist, `${browser}.zip`), "-C", target, ...await readdir(target)]).catch(async () => {
     await exec("zip", ["-qr", join(dist, `${browser}.zip`), "."], { cwd: target });
   });
