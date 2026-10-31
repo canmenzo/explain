@@ -165,7 +165,7 @@
 
   // Each new character fades in from violet through pink to the text color, paced evenly
   // (at most 90 a second, and any burst clears within half a second). After CreatorHive/bridle (MIT).
-  const FADE = 900;
+  const FADE = 450;
   const TINT = [
     { offset: 0, opacity: 0, color: "color-mix(in oklab, #8B5CF6 65%, #1B2230)" },
     { offset: 0.35, opacity: 1 },
@@ -192,7 +192,7 @@
     const reveal = (text) => {
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) return answer.append(text);
       const chars = segmenter ? Array.from(segmenter.segment(text), (part) => part.segment) : Array.from(text);
-      const step = Math.min(1000 / 90, 500 / chars.length);
+      const step = Math.min(1000 / 220, 200 / chars.length);
       last = Math.max(performance.now(), last);
       for (const char of chars) {
         const span = document.createElement("span");
