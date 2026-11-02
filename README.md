@@ -18,7 +18,11 @@ Firefox 140+: load `manifest.json` from `explain-firefox.zip` in `about:debuggin
 
 ## Update
 
-Copies installed from the zip check GitHub for a new release when you open the popup. When one is out, download the new zip, unzip it over your Explain folder and click **Reload Explain** in the notice. Your key is kept.
+Chrome Web Store and Firefox Add-ons installations update automatically through the browser when a newer version is published to the same store listing. Explain does not check GitHub for updates. Your saved key is kept.
+
+Developer-mode ZIP and temporary Firefox installations do not receive automatic updates. Replace the files in the same folder, then reload the extension from `chrome://extensions` or `about:debugging`.
+
+To publish an update, increase the version in `package.json`, both manifests, `Cargo.toml`, and `Cargo.lock`, run `npm run build`, then upload `dist/chrome.zip` and `dist/firefox.zip` to the existing Chrome Web Store and Firefox Add-ons listings. Keep the Firefox add-on ID (`explain@menzo.dev`) unchanged and omit custom `update_url` values so the stores manage updates. A GitHub push or release alone does not update installed extensions.
 
 ## Privacy
 
