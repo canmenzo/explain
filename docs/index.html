@@ -3,9 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>(function(){var l;try{l=localStorage.getItem("lang")}catch(e){}if(l==="en")return;var n=(navigator.languages&&navigator.languages[0])||navigator.language||"";if(l==="tr"||/^tr\b/i.test(n))location.replace("tr/"+location.hash)})()</script>
 <title>Explain: plain explanations for what you read</title>
 <meta name="description" content="Explain is a free browser extension for Chrome and Firefox. Select a word or passage, right-click, choose Explain, and a small card streams a short plain-language explanation from Google Gemini, using your own key.">
 <link rel="canonical" href="https://explain.menzo.dev/">
+<link rel="alternate" hreflang="en" href="https://explain.menzo.dev/">
+<link rel="alternate" hreflang="tr" href="https://explain.menzo.dev/tr/">
+<link rel="alternate" hreflang="x-default" href="https://explain.menzo.dev/">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="icon-128.png">
 <meta name="color-scheme" content="light dark">
@@ -31,11 +35,12 @@
 <script>document.documentElement.className="js"</script>
 </head>
 <body>
+<!-- Turkish copy: tr/index.html. Any change to this page goes there too, in the same push. -->
 <a class="skip" href="#main">Skip to content</a>
 <nav class="pill" aria-label="Main">
 <a class="brand" href="#top"><img src="icon-128.png" alt="" width="24" height="24">Explain</a>
 <div class="links"><a href="#how">How it works</a><a href="#privacy">Privacy</a><a href="#install">Install</a><a href="#faq">FAQ</a></div>
-<a class="btn sm" href="https://github.com/canmenzo/explain/releases/latest">Download</a>
+<div class="nav-end"><a class="lang" href="tr/" hreflang="tr" lang="tr" onclick="try{localStorage.setItem('lang','tr')}catch(e){}" aria-label="Türkçe">TR</a><a class="btn sm" href="https://github.com/canmenzo/explain/releases/latest">Download</a></div>
 </nav>
 <main id="main">
 <header class="hero" id="top">
