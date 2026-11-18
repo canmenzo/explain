@@ -2,7 +2,7 @@
 @media(prefers-color-scheme:dark){:root{--bg:#10141b;--surface:#161c26;--raised:#1b2230;--text:#eef2f8;--soft:#a7b1c2;--border:#273041;--accent:#9bb7ee;--accent-bg:#3d6bc0;--on-accent:#fff;--wash:#16213a;--g1:#fff;--g2:#9bb7ee;--menu:#262c37;--menu-text:#e6e9ef;--menu-hot:#34435f;--page:#141922;--page-text:#d5dbe6;--page-soft:#8e99ab;--sel:#34528a;--sel-text:#fff;--shadow:0 1px 2px rgba(0,0,0,.3),0 32px 64px -32px rgba(0,0,0,.7);--lift:0 1px 2px rgba(0,0,0,.3),0 12px 32px -16px rgba(0,0,0,.6)}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:0}
-body{margin:0;background:radial-gradient(70% 640px at 50% 0,var(--wash),transparent) 0 0/100% 640px no-repeat,var(--bg);color:var(--text);font-family:Commissioner,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:24px;text-wrap:pretty;-webkit-font-smoothing:antialiased}
+body{margin:0;background:radial-gradient(70% 640px at 50% 0,var(--wash),transparent) 0 0/100% 640px no-repeat,var(--bg);color:var(--text);font-family:Commissioner,var(--script,system-ui),system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:24px;text-wrap:pretty;-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--accent);text-underline-offset:3px}
 code,kbd{font-family:ui-monospace,"Geist Mono",Consolas,monospace;font-size:.875em;background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1px 5px;overflow-wrap:anywhere}
@@ -18,8 +18,6 @@ nav.pill .links a{color:var(--soft);text-decoration:none;transition:color .5s va
 nav.pill .links a:hover,nav.pill .links a[aria-current]{color:var(--text)}
 nav.pill .links a[aria-current]{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:6px;text-decoration-thickness:2px}
 .nav-end{display:flex;align-items:center;gap:8px}
-.lang{padding:6px 8px;border-radius:8px;font-size:13px;line-height:20px;font-weight:600;color:var(--soft);text-decoration:none;transition:color .5s var(--ease)}
-.lang:hover{color:var(--text)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border-radius:12px;font:inherit;font-size:16px;line-height:24px;font-weight:600;text-decoration:none;background:var(--accent-bg);color:var(--on-accent);border:1px solid var(--accent-bg);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 6px 16px -8px color-mix(in srgb,var(--accent-bg) 70%,transparent);transition:transform .5s var(--ease),filter .5s var(--ease),border-color .5s var(--ease)}
 .btn svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .btn:hover{filter:brightness(1.08);transform:translateY(-2px)}
@@ -120,9 +118,9 @@ footer nav a:hover{transform:translateY(-2px)}
 .lights{display:flex;gap:6px}.lights i{width:10px;height:10px;border-radius:9999px;background:var(--border)}
 .url{flex:1;min-width:0;padding:4px 12px;border-radius:9999px;background:var(--page);color:var(--page-soft);font-size:12px;line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bar img{width:20px;height:20px;border-radius:5px}
-.page{position:relative;overflow:hidden;min-height:400px;padding:40px 56px 48px;border-radius:12px;background:var(--page);color:var(--page-text);font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:32px}
+.page{position:relative;overflow:hidden;min-height:400px;padding:40px 56px 48px;border-radius:12px;background:var(--page);color:var(--page-text);font-family:Georgia,"Times New Roman",var(--script,serif),serif;font-size:18px;line-height:32px}
 .page p{margin:0 0 16px;max-width:620px}
-.page .kicker{margin:0 0 8px;font-family:Commissioner,system-ui,sans-serif;font-size:12px;line-height:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--page-soft)}
+.page .kicker{margin:0 0 8px;font-family:Commissioner,var(--script,system-ui),system-ui,sans-serif;font-size:12px;line-height:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--page-soft)}
 .page .ptitle{margin:0 0 24px;font-size:32px;line-height:40px;font-weight:700;letter-spacing:-.01em}
 .page mark{background:var(--sel);color:var(--sel-text);border-radius:3px;padding:0 2px;transition:background-color .3s var(--ease),color .3s var(--ease)}
 .menu{position:absolute;left:50%;top:180px;z-index:2;display:flex;flex-direction:column;width:228px;padding:6px;border:1px solid color-mix(in srgb,var(--menu-text) 12%,transparent);border-radius:10px;background:var(--menu);color:var(--menu-text);font:13px/20px system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 12px 32px -8px rgba(15,23,42,.3);opacity:0;transform:translateY(-4px) scale(.98);transform-origin:top left;transition:opacity .2s var(--ease),transform .2s var(--ease);pointer-events:none}
@@ -194,3 +192,37 @@ footer .social{gap:4px}
 footer .social a{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:0;border:0;border-radius:8px;color:var(--soft)}
 footer .social a:hover{color:var(--text);transform:none}
 footer .social svg{width:20px;height:20px}
+/* Language menu. Resets the FAQ's generic details/summary rules. */
+.langs{position:fixed;top:29px;inset-inline-end:24px;z-index:6;max-width:none;margin:0;padding:0;border:0;border-radius:0;background:none}
+.langs summary::after{content:none}
+.langs summary{margin:0;list-style:none;display:flex;justify-content:flex-start;align-items:center;gap:6px;padding:6px;padding-inline:10px 8px;border:1px solid var(--border);border-radius:9999px;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 8px 24px -16px rgba(23,32,51,.2);color:var(--soft);font-weight:400;cursor:pointer;transition:border-color .5s var(--ease),color .5s var(--ease)}
+.langs summary::-webkit-details-marker{display:none}
+.langs summary:focus-visible{outline-offset:2px;border-radius:9999px}
+.langs summary:hover,.langs[open] summary{border-color:var(--accent);color:var(--text)}
+.langs svg:not(.chev){display:block;flex:none;width:24px;height:16px;clip-path:inset(0 round 3px)}
+.langs .chev{width:12px;height:12px;transition:transform .5s var(--ease)}
+.langs[open] .chev{transform:rotate(180deg)}
+.langs-menu{position:absolute;inset-inline-end:0;top:calc(100% + 8px);display:grid;min-width:176px;padding:6px;border:1px solid var(--border);border-radius:12px;background:var(--raised);box-shadow:var(--lift)}
+.langs-menu a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;color:var(--soft);font-size:14px;line-height:20px;font-weight:600;text-decoration:none;transition:background-color .5s var(--ease),color .5s var(--ease)}
+.langs-menu a:hover{background:color-mix(in srgb,var(--text) 6%,transparent);color:var(--text)}
+.langs-menu a[aria-current]{color:var(--text)}
+.langs-menu a[aria-current]::after{content:"";margin-inline-start:auto;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+/* The widest translated nav (fr, 614px) clears the menu from 802px up. */
+@media(max-width:820px){nav.pill .links{display:none}}
+@media(max-width:640px){.langs{inset-inline-end:12px}}
+@media(max-width:420px){.langs .chev{display:none}.langs summary{padding:6px 10px}nav.pill{margin-inline-start:16px}}
+/* Translations: script fonts (loaded only on those pages) and right-to-left Arabic. */
+html[lang=zh]{--script:"Noto Sans SC"}
+html[lang=hi]{--script:"Noto Sans Devanagari"}
+html[lang=ar]{--script:"Noto Sans Arabic"}
+html[lang=ar] *,html[lang=hi] *{letter-spacing:0!important}
+[dir=rtl] .demo{text-align:right}
+[dir=rtl] .menu{transform-origin:top right}
+[dir=rtl] .url,[dir=rtl] code,[dir=rtl] kbd{direction:ltr;unicode-bidi:isolate}
+[dir=rtl] .chips li{padding:4px 4px 4px 12px}
+[dir=rtl] .steps li{padding:20px 68px 20px 20px}
+[dir=rtl] .steps li::before{left:auto;right:20px}
+[dir=rtl] .facts li{padding-left:0;padding-right:20px}
+[dir=rtl] .facts li::before{left:auto;right:2px}
+@media(max-width:640px){.steps span strong{white-space:normal}}
+@media(max-width:640px){[dir=rtl] .steps li{padding:16px 60px 16px 16px}[dir=rtl] .steps li::before{left:auto;right:16px}}

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explain：为你读到的内容提供通俗解释</title>
+<meta name="description" content="Explain 是一款适用于 Chrome 和 Firefox 的免费浏览器扩展。选中一个词或一段文字，右键点击并选择 Explain，一张小卡片就会使用你自己的密钥，逐字显示来自 Google Gemini 的简短通俗解释。">
+<link rel="canonical" href="https://explain.menzo.dev/zh/">
+<link rel="alternate" hreflang="en" href="https://explain.menzo.dev/">
+<link rel="alternate" hreflang="tr" href="https://explain.menzo.dev/tr/">
+<link rel="alternate" hreflang="es" href="https://explain.menzo.dev/es/">
+<link rel="alternate" hreflang="zh" href="https://explain.menzo.dev/zh/">
+<link rel="alternate" hreflang="hi" href="https://explain.menzo.dev/hi/">
+<link rel="alternate" hreflang="ar" href="https://explain.menzo.dev/ar/">
+<link rel="alternate" hreflang="fr" href="https://explain.menzo.dev/fr/">
+<link rel="alternate" hreflang="x-default" href="https://explain.menzo.dev/">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="apple-touch-icon" href="../icon-128.png">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fbfcfe" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#10141b" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Explain">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="Explain：为你读到的内容提供通俗解释">
+<meta property="og:description" content="选中一个词或一段文字，右键点击，选择 Explain。来自 Google Gemini 的简短回答会出现在文字旁边，使用你自己的免费密钥。">
+<meta property="og:url" content="https://explain.menzo.dev/zh/">
+<meta property="og:image" content="https://explain.menzo.dev/og.png?v=20261023">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Explain 在文章中选中的词语旁边显示通俗的解释。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Explain：为你读到的内容提供通俗解释">
+<meta name="twitter:description" content="选中一个词或一段文字，右键点击，选择 Explain。来自 Google Gemini 的简短回答会出现在文字旁边，使用你自己的免费密钥。">
+<meta name="twitter:image" content="https://explain.menzo.dev/og.png?v=20261023">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;700&amp;family=Noto+Sans+SC:wght@400;600;700&amp;display=swap">
+<link rel="stylesheet" href="../style.css">
+<script>document.documentElement.className="js"</script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<nav class="pill" aria-label="主导航">
+<a class="brand" href="#top"><img src="../icon-128.png" alt="" width="24" height="24">Explain</a>
+<div class="links"><a href="#how">工作原理</a><a href="#privacy">隐私</a><a href="#install">安装</a><a href="#faq">常见问题</a></div>
+<div class="nav-end"><a class="btn sm" href="https://github.com/canmenzo/explain/releases/latest">下载</a></div>
+</nav>
+<details class="langs"><summary aria-label="语言: 中文"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ee1c25"/><path fill="#ffff00" d="M5 2l1.18 3.62H10L6.91 7.86 8.09 11.5 5 9.26 1.91 11.5 3.09 7.86 0 5.62h3.82z"/><circle cx="10" cy="2" r=".9" fill="#ffff00"/><circle cx="12" cy="4" r=".9" fill="#ffff00"/><circle cx="12" cy="7" r=".9" fill="#ffff00"/><circle cx="10" cy="9" r=".9" fill="#ffff00"/></svg><svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></summary><div class="langs-menu"><a href="../" hreflang="en" lang="en" data-lang="en"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#b22234"/><rect y="1.538" width="30" height="1.538" fill="#fff"/><rect y="4.615" width="30" height="1.538" fill="#fff"/><rect y="7.692" width="30" height="1.538" fill="#fff"/><rect y="10.769" width="30" height="1.538" fill="#fff"/><rect y="13.846" width="30" height="1.538" fill="#fff"/><rect y="16.923" width="30" height="1.538" fill="#fff"/><rect width="12" height="10.769" fill="#3c3b6e"/><g fill="#fff"><circle cx="1.2" cy="1.1" r=".38"/><circle cx="3.6" cy="1.1" r=".38"/><circle cx="6.0" cy="1.1" r=".38"/><circle cx="8.4" cy="1.1" r=".38"/><circle cx="10.8" cy="1.1" r=".38"/><circle cx="1.2" cy="3.3" r=".38"/><circle cx="3.6" cy="3.3" r=".38"/><circle cx="6.0" cy="3.3" r=".38"/><circle cx="8.4" cy="3.3" r=".38"/><circle cx="10.8" cy="3.3" r=".38"/><circle cx="1.2" cy="5.5" r=".38"/><circle cx="3.6" cy="5.5" r=".38"/><circle cx="6.0" cy="5.5" r=".38"/><circle cx="8.4" cy="5.5" r=".38"/><circle cx="10.8" cy="5.5" r=".38"/><circle cx="1.2" cy="7.7" r=".38"/><circle cx="3.6" cy="7.7" r=".38"/><circle cx="6.0" cy="7.7" r=".38"/><circle cx="8.4" cy="7.7" r=".38"/><circle cx="10.8" cy="7.7" r=".38"/><circle cx="1.2" cy="9.9" r=".38"/><circle cx="3.6" cy="9.9" r=".38"/><circle cx="6.0" cy="9.9" r=".38"/><circle cx="8.4" cy="9.9" r=".38"/><circle cx="10.8" cy="9.9" r=".38"/></g></svg><span>English</span></a><a href="../tr/" hreflang="tr" lang="tr" data-lang="tr"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#e30a17"/><circle cx="10.625" cy="10" r="5" fill="#fff"/><circle cx="11.875" cy="10" r="4" fill="#e30a17"/><path fill="#fff" d="M12.083 10L13.81 9.439 13.81 7.622 14.878 9.092 16.606 8.531 15.538 10 16.606 11.469 14.878 10.908 13.81 12.378 13.81 10.561z"/></svg><span>Türkçe</span></a><a href="../es/" hreflang="es" lang="es" data-lang="es"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#aa151b"/><rect y="5" width="30" height="10" fill="#f1bf00"/></svg><span>Español</span></a><a href="../zh/" hreflang="zh" lang="zh" data-lang="zh" aria-current="page"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ee1c25"/><path fill="#ffff00" d="M5 2l1.18 3.62H10L6.91 7.86 8.09 11.5 5 9.26 1.91 11.5 3.09 7.86 0 5.62h3.82z"/><circle cx="10" cy="2" r=".9" fill="#ffff00"/><circle cx="12" cy="4" r=".9" fill="#ffff00"/><circle cx="12" cy="7" r=".9" fill="#ffff00"/><circle cx="10" cy="9" r=".9" fill="#ffff00"/></svg><span>中文</span></a><a href="../hi/" hreflang="hi" lang="hi" data-lang="hi"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect width="30" height="6.67" fill="#ff9933"/><rect y="13.33" width="30" height="6.67" fill="#138808"/><circle cx="15" cy="10" r="2.6" fill="none" stroke="#000080" stroke-width=".7"/><circle cx="15" cy="10" r=".6" fill="#000080"/></svg><span>हिन्दी</span></a><a href="../ar/" hreflang="ar" lang="ar" data-lang="ar"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect width="30" height="6.67" fill="#ce1126"/><rect y="13.33" width="30" height="6.67" fill="#000"/><circle cx="15" cy="10" r="2" fill="#c09300"/></svg><span>العربية</span></a><a href="../fr/" hreflang="fr" lang="fr" data-lang="fr"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect width="10" height="20" fill="#002395"/><rect x="20" width="10" height="20" fill="#ed2939"/></svg><span>Français</span></a></div></details>
+<main id="main">
+<header class="hero" id="top">
+<p class="status"><span class="dot" aria-hidden="true"></span><span>适用于 Chrome 和 Firefox</span></p>
+<h1>在哪里读，就在哪里读懂</h1>
+<p class="sub">选中文字，<span class="nw">右键点击，</span>选择 Explain。简短易懂的回答就会出现在旁边。</p>
+<div class="cta"><a class="btn" href="https://github.com/canmenzo/explain/releases/latest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>从 GitHub 下载</a><a class="btn ghost" href="#install">查看安装步骤</a></div>
+
+<figure class="demo" id="demo">
+<div class="win" role="img" aria-label="示意图：一篇关于潮汐的文章中选中了“朔望”一词，右键菜单中有 Explain，词语旁边的卡片用两句话解释了它。">
+<div class="bar" aria-hidden="true"><span class="lights"><i></i><i></i><i></i></span><span class="url">example.org/essays/tides</span><img src="../icon-128.png" alt="" width="20" height="20"></div>
+<div class="page" aria-hidden="true">
+<p class="kicker">自然笔记</p>
+<p class="ptitle">海水为何一天涨两次</p>
+<p>大部分工作由月球完成：它把离自己较近一侧的海水拉向自己，远侧的海水则落在后面。每月有两次，在<mark id="sel">朔望</mark>之时，太阳也会把自己的引力叠加到月球的引力上。</p>
+<p>结果就是大潮：涨潮时海水漫到沙滩的最高处，退潮时则露出一个月里其余时间都被淹没的礁石。</p>
+<p>在这两个时间之间，日月的引力方向互成直角，随之而来的小潮比较温和。几百年来，水手们一直依照这个周期安排航行。</p>
+<div class="menu" id="menu"><span>复制</span><span>在网上搜索“朔望”</span><span>打印</span><hr><span class="ex" id="ex"><img src="../icon-128.png" alt="" width="16" height="16">Explain</span></div>
+<div class="xcard" id="xcard"><div class="xh"><span class="mark">e</span><span class="xt">朔望</span><span class="xx"><svg viewBox="0 0 12 12"><path d="m2 2 8 8M10 2l-8 8"/></svg></span></div><div class="xb"><div class="skel"><i></i><i></i><i></i></div><p class="answer" id="answer">朔望指三个天体排成一条直线。这里指太阳、月球和地球在新月和满月时排成一线，它们的引力相互叠加，形成后文所说的大潮。</p></div></div>
+</div>
+</div>
+<figcaption><ol class="chips" id="chips"><li data-s="1">选中</li><li data-s="2">Explain</li><li data-s="3">阅读</li></ol><button class="replay" id="replay" type="button" aria-label="重播演示" hidden disabled><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.25 8a5.25 5.25 0 1 1-1.54-3.71M13.25 2.75v3h-3"/></svg><span>重播</span></button></figcaption>
+</figure>
+</header>
+
+<section class="wrap" id="how">
+<p class="eyebrow rv">工作原理</p>
+<h2 class="rv">添加一次密钥，之后右键即可</h2>
+<ol class="trio">
+<li class="card rv"><span class="n">1</span><h3>添加密钥</h3><p>把免费的 Google AI Studio 密钥粘贴到工具栏弹出窗口中。</p></li>
+<li class="card rv"><span class="n">2</span><h3>右键点击</h3><p>选中任意词语或段落，然后选择 <strong>Explain</strong>。</p></li>
+<li class="card rv"><span class="n">3</span><h3>阅读</h3><p>回答会在文字旁的卡片中逐字出现。按 <kbd>Esc</kbd> 即可关闭。</p></li>
+</ol>
+<div class="grid">
+<div class="card rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg><h3>结合上下文解释</h3><p>选中内容所在的段落也会一并发送，让回答贴合页面。</p></div>
+<div class="card rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><h3>边写边显示</h3><p>Gemini 写到哪里，文字就显示到哪里。页面不会跳动。</p></div>
+<div class="card rv"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>不用不动</h3><p>在你选择 Explain 之前，它不会在任何页面上运行。</p></div>
+<div class="card rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 11-2.3-5.6M20 4v4h-4"/></svg><h3>出错时说清楚</h3><p>清晰易懂的错误提示，以及一个<strong>重试</strong>（Try again）按钮。</p></div>
+</div>
+</section>
+
+<section class="wrap" id="screens">
+<p class="eyebrow rv">截图</p>
+<h2 class="rv">在浏览器中的样子</h2>
+<div class="gallery">
+<figure class="rv"><a href="../img/5-popup.png"><picture><source srcset="../img/5-popup.webp" type="image/webp"><img src="../img/5-popup.png" width="1280" height="800" loading="lazy" decoding="async" alt="Explain 工具栏弹出窗口在一篇文章上方打开，包含 Gemini API 密钥输入框、Get a free key 链接和 Save key 按钮"></picture></a></figure>
+<figure class="rv"><a href="../img/1-context-menu.png"><picture><source srcset="../img/1-context-menu.webp" type="image/webp"><img src="../img/1-context-menu.png" width="1280" height="800" loading="lazy" decoding="async" alt="文章中选中了 syzygy 一词，右键菜单已打开，Explain 处于高亮状态"></picture></a></figure>
+<figure class="rv"><a href="../img/3-explanation.png"><picture><source srcset="../img/3-explanation.webp" type="image/webp"><img src="../img/3-explanation.png" width="1280" height="800" loading="lazy" decoding="async" alt="选中词下方的 Explain 卡片，解释 syzygy 是太阳、月球和地球排成一线"></picture></a></figure>
+<figure class="rv"><a href="../img/4-error-retry.png"><picture><source srcset="../img/4-error-retry.webp" type="image/webp"><img src="../img/4-error-retry.png" width="1280" height="800" loading="lazy" decoding="async" alt="Explain 卡片提示已达到 Google 的速率限制，并显示 Try again 按钮"></picture></a></figure>
+</div>
+</section>
+
+<div class="tagline"><div class="wrap"><p id="tag">遇到不认识的词，不该让你跳到另一个标签页。</p></div></div>
+
+<section class="wrap" id="privacy">
+<p class="eyebrow rv">隐私</p>
+<h2 class="rv">你的文字只发给 Google，不去别处</h2>
+<p class="lead rv">没有服务器，没有账号，没有统计分析。请求使用你自己的密钥，直接从浏览器发送到 Google。</p>
+<div class="facts">
+<div class="card rv"><h3>会发送什么</h3><ul><li>你选中的文字</li><li>它所在的段落</li><li>页面标题</li><li>你的 API 密钥，用于验证请求</li></ul></div>
+<div class="card rv"><h3>绝不发送什么</h3><ul><li>页面地址</li><li>页面的 HTML</li><li>你未选择 Explain 的标签页中的任何内容</li></ul></div>
+<div class="card rv"><h3>会保存什么</h3><ul><li>只有你的 API 密钥，保存在此浏览器中</li><li>从不同步到其他设备</li><li>回答显示后即被丢弃</li></ul></div>
+</div>
+<p class="note rv"><strong>免费层级。</strong>Google 可能会使用免费层级的请求来改进其产品，因此请避免发送敏感内容。请阅读<a href="../privacy.html">隐私政策</a>（英文）。</p>
+</section>
+
+<section class="wrap" id="install">
+<p class="eyebrow rv">安装</p>
+<h2 class="rv">大约两分钟即可就绪</h2>
+<ol class="steps rv">
+<li><strong>下载</strong><span>从<a href="https://github.com/canmenzo/explain/releases/latest">最新版本</a>下载 <code>explain-chrome.zip</code> 并解压。</span></li>
+<li><strong>打开扩展程序页面</strong><span>前往 <code>chrome://extensions</code>，打开<strong>开发者模式</strong>（Developer mode）。</span></li>
+<li><strong>加载扩展程序</strong><span>点击<strong>加载已解压的扩展程序</strong>（Load unpacked），选择解压后的文件夹。</span></li>
+<li><strong>添加密钥</strong><span>点击 Explain 图标，然后点击<strong>获取免费密钥</strong>（Get a free key）。粘贴密钥，再点击<strong>保存密钥</strong>（Save key）。</span></li>
+</ol>
+<div class="note rv"><strong>更新。</strong>以开发者模式加载的副本不会自动更新。下载新的 zip 文件，解压覆盖原来的 Explain 文件夹，然后在 <code>chrome://extensions</code> 中点击 Explain 卡片上的重新加载按钮。你的密钥会保留。</div>
+<div class="note rv"><strong>Firefox 140+。</strong>解压 <code>explain-firefox.zip</code>，打开 <code>about:debugging#/runtime/this-firefox</code>，点击<strong>临时载入附加组件</strong>（Load Temporary Add-on），选择 <code>manifest.json</code>。Firefox 重启后会将其移除。</div>
+
+</section>
+
+<section class="wrap" id="faq">
+<p class="eyebrow rv">常见问题</p>
+<h2 class="rv">大家常问的问题</h2>
+<details class="rv"><summary>需要付费吗？</summary><p>Explain 免费，采用 MIT 许可证。从 Google AI Studio 获取的 Gemini 密钥也是免费的，但有速率限制。详见 <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API 价格</a>。</p></details>
+<details class="rv"><summary>具体发送了什么，发给谁？</summary><p>选中的文字、它所在的段落和页面标题，直接发送到 <code>generativelanguage.googleapis.com</code>。从不发送页面地址或 HTML。</p></details>
+<details class="rv"><summary>我的密钥保存在哪里？</summary><p>保存在此浏览器中扩展的本地存储里。它不会同步，移除 Explain 时会一并删除。</p></details>
+<details class="rv"><summary>还没添加密钥就选择了 Explain，会怎样？</summary><p>卡片会提示你添加密钥；在浏览器允许的情况下，密钥弹出窗口会自动打开。</p></details>
+<details class="rv"><summary>支持哪些浏览器？</summary><p>桌面版 Chrome，以及 Firefox 140 或更高版本。</p></details>
+<details class="rv"><summary>回答由哪个模型生成？</summary><p>段落由 Gemini 3.8 Flash 解释，单个词语和短语由 Gemini 3.6 Flash 解释，均不使用 Google 搜索。</p></details>
+<details class="rv"><summary>它能读取我访问的每个页面吗？</summary><p>不能。只有在你选择 Explain 时，它才会获得当前标签页的访问权限。</p></details>
+<details class="rv"><summary>Chrome 应用商店里有吗？</summary><p>暂时还没有。目前请从 GitHub 发布页安装。</p></details>
+</section>
+
+<section class="wrap final">
+<div class="panel rv"><img class="pm" src="../icon-128.png" alt="" width="48" height="48" loading="lazy"><h2>继续阅读，不必中断</h2><div class="cta"><a class="btn lg" href="https://github.com/canmenzo/explain/releases/latest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>从 GitHub 下载</a><a class="btn ghost lg" href="https://github.com/canmenzo/explain">查看源代码</a></div></div>
+</section>
+
+<section class="wrap" id="more">
+<p class="eyebrow rv">menzo 的更多作品</p>
+<h2 class="rv">其他免费开源工具</h2>
+<div class="grid tools"><a class="card rv" href="https://babil.menzo.dev"><img src="https://babil.menzo.dev/icon-128.png" alt="" width="40" height="40" loading="lazy"><h3>Babil</h3><p>为 YouTube、Twitch 和 Kick 提供实时翻译字幕，直接在浏览器中运行。</p></a><a class="card rv" href="https://hammurabi.menzo.dev"><img src="https://hammurabi.menzo.dev/favicon.svg" alt="" width="40" height="40" loading="lazy"><h3>Hammurabi</h3><p>为电脑播放或听到的一切提供实时字幕和翻译，支持 Windows、macOS 和 Linux。</p></a></div>
+</section>
+</main>
+<footer><div class="wrap"><div class="fb"><a class="brand" href="#top"><img src="../icon-128.png" alt="" width="24" height="24">Explain</a><p>为你读到的内容提供通俗解释。</p></div><nav aria-label="页脚"><a href="https://github.com/canmenzo/explain">GitHub</a><a href="https://github.com/canmenzo/explain/releases/latest">版本发布</a><a href="../privacy.html">隐私</a></nav></div><div class="wrap fine"><p>采用 MIT 许可证。由 <a href="https://menzo.dev">menzo</a> 制作。</p><nav class="social" aria-label="社交链接"><a href="https://x.com/canmenzo" aria-label="X 主页"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.5 22H2.4l8.2-9.4L.8 2h6.5l4.4 6.7L18.9 2Zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20Z"/></svg></a><a href="https://github.com/canmenzo" aria-label="GitHub 主页"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.24 1.16-3.03-.12-.28-.5-1.43.11-2.98 0 0 .94-.3 3.08 1.15a10.7 10.7 0 0 1 5.62 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.8 1.16 3.03 0 4.33-2.64 5.28-5.15 5.56.4.35.76 1.03.76 2.08v3.1c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg></a><a href="https://www.linkedin.com/in/canmenzo/" aria-label="LinkedIn 主页"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="1" y="1" width="22" height="22" rx="2" fill="currentColor"/><circle cx="6" cy="6" r="1.5" fill="var(--bg)"/><path fill="var(--bg)" d="M4.5 9h3v11h-3zm5.5 0h3v1.5c.7-1.2 1.8-1.8 3.2-1.8 3 0 3.8 1.9 3.8 4.8V20h-3v-6c0-1.7-.3-2.7-1.8-2.7-1.6 0-2.2 1.1-2.2 2.7v6h-3Z"/></svg></a><a href="mailto:hi@menzo.dev" aria-label="电子邮件：hi@menzo.dev"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm0 2 9 6 9-6V6l-9 6-9-6v1Z"/></svg></a></nav></div></footer>
+<dialog class="lb" id="lb" aria-label="截图"><img alt=""></dialog>
+<script>
+(function(){
+var rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+var demo=document.getElementById("demo"),page=demo.querySelector(".page"),sel=document.getElementById("sel"),menu=document.getElementById("menu"),ex=document.getElementById("ex"),card=document.getElementById("xcard"),answer=document.getElementById("answer"),replay=document.getElementById("replay"),chips=[].slice.call(document.querySelectorAll("#chips li"));
+var full=answer.textContent,timers=[];
+function place(){
+var p=page.getBoundingClientRect(),s=sel.getBoundingClientRect(),x=s.left-p.left,y=s.bottom-p.top;
+var mw=menu.offsetWidth,cw=card.offsetWidth;
+menu.style.left=Math.max(12,Math.min(p.width-mw-12,x+s.width-8))+"px";menu.style.top=(y-4)+"px";
+card.style.left=Math.max(12,Math.min(p.width-cw-12,x+s.width/2-cw/2))+"px";card.style.top=(y+10)+"px";
+// Size the mock page to the card's full-answer height so streaming never changes the layout.
+if(answer.textContent===full)page.style.minHeight=(y+10+card.offsetHeight+32)+"px";
+}
+function stage(n){demo.dataset.stage=n;chips.forEach(function(c){if(+c.dataset.s===Math.min(n,3))c.setAttribute("aria-current","step");else c.removeAttribute("aria-current")})}
+function at(ms,f){timers.push(setTimeout(f,ms))}
+// Each new character fades in from violet through pink to the text color, paced evenly
+// (at most 90 a second, and any burst clears within half a second). After CreatorHive/bridle (MIT).
+var TINT=[{offset:0,opacity:0,color:"color-mix(in oklab, #8b5cf6 65%, #1b2230)"},{offset:.35,opacity:1},{offset:.4,color:"color-mix(in oklab, #ec4899 55%, #1b2230)"},{offset:1,opacity:1,color:"#1b2230"}],last=0;
+function reveal(text){
+var chars=Array.from(text),step=Math.min(1000/90,500/chars.length);last=Math.max(performance.now(),last);
+chars.forEach(function(c){var s=document.createElement("span");s.textContent=c;answer.appendChild(s);
+if(!s.animate)return;var a=s.animate(TINT,{duration:900,fill:"both"});a.startTime=last+=step;a.onfinish=function(){s.replaceWith(c)}});
+}
+// The whole sequence finishes in under five seconds.
+function play(){
+timers.forEach(clearTimeout);timers=[];replay.disabled=true;answer.textContent="";delete demo.dataset.streaming;
+stage(0);at(400,function(){stage(1)});at(1100,function(){stage(2)});at(1700,function(){ex.classList.add("hot")});
+at(2200,function(){ex.classList.remove("hot");stage(3)});
+// Gemini-sized chunks of about six words, each revealed exactly like the extension's card.
+var words=full.split(" "),t=2900,n=0;last=0;
+for(var i=0;i<words.length;i+=6)(function(chunk,k){at(t+k*320,function(){if(!k)demo.dataset.streaming="";reveal(chunk)})})((i?" ":"")+words.slice(i,i+6).join(" "),n++);
+at(t+(n-1)*320+1400,function(){delete demo.dataset.streaming;stage(4);replay.disabled=false});
+}
+place();addEventListener("resize",place);
+if(document.fonts)document.fonts.ready.then(place);
+if(rm||!("IntersectionObserver" in window)){stage(4);return}
+replay.hidden=false;replay.addEventListener("click",play);
+stage(0);
+var o=new IntersectionObserver(function(es){if(es[0].isIntersecting){o.disconnect();play()}},{threshold:.6});o.observe(demo);
+})();
+(function(){
+var rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+var t=document.getElementById("tag");
+t.innerHTML=t.textContent.split(" ").map(function(w){return '<span class="w">'+w+"</span>"}).join(" ");
+var ws=[].slice.call(t.querySelectorAll(".w"));
+var rv=[].slice.call(document.querySelectorAll(".rv"));
+function all(){ws.concat(rv).forEach(function(e){e.classList.add("on")})}
+if(!("IntersectionObserver" in window)||rm){all();return}
+function mk(m){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");o.unobserve(e.target)}})},{rootMargin:m});return o}
+var wo=mk("0px 0px -40% 0px");ws.forEach(function(w){wo.observe(w)});
+// Reveal once an element is well inside the viewport, staggering items that arrive together.
+var ro=new IntersectionObserver(function(es){var n=0;es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target,d=n++*90;t.style.transitionDelay=d+"ms";t.classList.add("on");ro.unobserve(t);setTimeout(function(){t.style.transitionDelay=""},d+900)})},{threshold:.2,rootMargin:"0px 0px -12% 0px"});
+rv.forEach(function(e){ro.observe(e)});
+var links=[].slice.call(document.querySelectorAll(".links a"));
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){if(a.getAttribute("href")==="#"+e.target.id)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current")})}})},{rootMargin:"-40% 0px -55% 0px"});
+links.forEach(function(a){var s=document.querySelector(a.getAttribute("href"));if(s)so.observe(s)});
+})();
+(function(){
+var lb=document.getElementById("lb"),img=lb.querySelector("img");
+if(!lb.showModal)return;
+[].slice.call(document.querySelectorAll(".gallery a")).forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();var i=a.querySelector("img");img.src=a.getAttribute("href");img.alt=i.alt;lb.showModal()})});
+lb.addEventListener("click",function(){lb.close()});
+})();
+</script>
+<script>(function(){var d=document.querySelector(".langs");if(!d)return;document.addEventListener("click",function(e){if(!d.contains(e.target))d.open=false});document.addEventListener("keydown",function(e){if(e.key==="Escape")d.open=false});d.addEventListener("click",function(e){var a=e.target.closest("a[data-lang]");if(a)try{localStorage.setItem("lang",a.dataset.lang)}catch(_){}})})()</script>
+</body>
+</html>
