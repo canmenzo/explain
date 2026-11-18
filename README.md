@@ -4,17 +4,25 @@
 
 <p align="center">Select text, right-click, choose <b>Explain</b>.<br>A short, plain answer streams in right beside it.</p>
 
-<p align="center"><a href="https://explain.menzo.dev">Website</a> · <a href="https://github.com/canmenzo/explain/releases/latest">Download</a> · <a href="PRIVACY.md">Privacy</a></p>
+<p align="center"><a href="https://chromewebstore.google.com/detail/explain/nfejbpifebfimljolnlalnmadhkgehod"><img src="https://img.shields.io/chrome-web-store/v/nfejbpifebfimljolnlalnmadhkgehod?label=Chrome%20Web%20Store&color=blue" alt="Chrome Web Store"></a> <a href="https://addons.mozilla.org/en-US/firefox/addon/explain/"><img src="https://img.shields.io/amo/v/explain?label=Firefox%20Add-ons&color=blue" alt="Firefox Add-ons"></a></p>
+
+<p align="center"><a href="https://explain.menzo.dev">Website</a> · <a href="PRIVACY.md">Privacy</a></p>
 
 <p align="center"><img src="docs/img/3-explanation.png" width="720" alt="The Explain card beside a selected word, explaining it in two sentences"></p>
 
 ## Install
 
+1. Install Explain from the [Chrome Web Store](https://chromewebstore.google.com/detail/explain/nfejbpifebfimljolnlalnmadhkgehod) or [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/explain/) (Firefox 140+).
+2. Click the Explain icon, follow **Get a free key** to Google AI Studio, paste the key and save.
+3. Select text, right-click and choose **Explain**.
+
+### Manual install
+
 1. Download `explain-chrome.zip` from the [latest release](https://github.com/canmenzo/explain/releases/latest) and unzip it.
 2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and pick the folder.
-3. Click the Explain icon, follow **Get a free key** to Google AI Studio, paste the key and save.
+3. Add your key as in step 2 above.
 
-Firefox 140+: load `manifest.json` from `explain-firefox.zip` in `about:debugging#/runtime/this-firefox`.
+Firefox 140+: load `manifest.json` from `explain-firefox.zip` in `about:debugging#/runtime/this-firefox`. Firefox removes it on restart.
 
 ## Update
 
